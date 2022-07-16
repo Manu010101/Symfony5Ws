@@ -28,7 +28,7 @@ class SoapController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstract
         $soapServer = new \SoapServer("../soap.wsdl",$options);
         $soapServer->setObject(new SoapOperations($this->getDoctrine()));
         // si SoapOperations service
-        $soapServer->setObject($commandeService);
+//        $soapServer->setObject($commandeService);
         $response = new Response();
         $response->headers->set('Content-Type', 'text/xml; charset=UTF-8');
 

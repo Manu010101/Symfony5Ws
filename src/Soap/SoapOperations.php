@@ -4,6 +4,7 @@ namespace App\Soap;
 
 use App\Entity\Categorie;
 use App\Entity\Commande;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -89,15 +90,40 @@ class SoapOperations
 
     }
 
-//    /**
-//     * @param integer
-//     * @return \App\Entity\Commande
-//     */
-//    public function getCommandeByDate($id){
-//        $commande = $this->doct->getRepository(Commande::class)->find($id);
-//        dd($commande);
-//        return $commande;
-//    }
+    /**
+     * @param integer $id
+     * @return \App\Soap\UserSoap
+     */
+    public function getUserById($id) : UserSoap{
+        $user = $this->doct->getRepository(User::class)->find($id);
+        return new UserSoap(
+            $user->getId(),
+            $user->getEmail(),
+            $user->getNom(),
+            $user->getPrenom()
+        );
+    }
+
+    /**
+     * @param \App\Soap\Intervalle
+     * @return \App\Soap\CommandeSoap
+     */
+    public function getCommandeByIntervalle($intervalle){
+        $commande = $this->doct->getRepository(Commande::class)->trouveParIntervalle($intervalle);
+        dd($commande);
+        $commandeSoap = new CommandeSoap(
+            $commande->getId(),
+            $commande->getDateCommande()->format('Y.m.d'),
+            $commande->getStatut(),
+            new UserSoap(
+                $commande->getUser()->getId(),
+                $commande->getUser()->getEmail(),
+                $commande->getUser()->getNom(),
+                $commande->getUser()->getPrenom()
+            )
+        );
+        return $commandeSoap;
+    }
 
 }
 
