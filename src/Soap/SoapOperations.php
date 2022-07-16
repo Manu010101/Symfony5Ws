@@ -90,6 +90,7 @@ class SoapOperations
 
     }
 
+
     /**
      * @param integer $id
      * @return \App\Soap\UserSoap
@@ -106,24 +107,29 @@ class SoapOperations
 
     /**
      * @param \App\Soap\Intervalle
-     * @return \App\Soap\CommandeSoap
+     * @return array(\App\Soap\CommandeSoap)
      */
-    public function getCommandeByIntervalle($intervalle){
-        $commande = $this->doct->getRepository(Commande::class)->trouveParIntervalle($intervalle);
-        dd($commande);
-        $commandeSoap = new CommandeSoap(
-            $commande->getId(),
-            $commande->getDateCommande()->format('Y.m.d'),
-            $commande->getStatut(),
-            new UserSoap(
-                $commande->getUser()->getId(),
-                $commande->getUser()->getEmail(),
-                $commande->getUser()->getNom(),
-                $commande->getUser()->getPrenom()
-            )
-        );
-        return $commandeSoap;
+    public function getCommandesByIntervalle($intervalle){
+        $commandes = $this->doct->getRepository(Commande::class)->findByIntervalle($intervalle);
+        $commandesSoap = [];
+
+        foreach ($commandes as $commande){
+            $commandesSoap[] = new CommandeSoap(
+                $commande->getId(),
+                $commande->getDateCommande()->format('Y.m.d'),
+                $commande->getStatut(),
+                new UserSoap(
+                    $commande->getUser()->getId(),
+                    $commande->getUser()->getEmail(),
+                    $commande->getUser()->getNom(),
+                    $commande->getUser()->getPrenom()
+                )
+            );
+        }
+
+        return $commandesSoap;
     }
+
 
 }
 

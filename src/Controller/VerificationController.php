@@ -14,7 +14,7 @@ class VerificationController extends \Symfony\Bundle\FrameworkBundle\Controller\
      */
     public function show(SoapOperations $soapOperations){
         $intervalle = new Intervalle('2022-07-10', '2022-07-15');
-        dd($soapOperations->getCommandeByIntervalle($intervalle));
+        dd($soapOperations->getCommandesByIntervalle($intervalle));
         return $this->render('base.html.twig', ['libelle' => $libelle]);
     }
 }
