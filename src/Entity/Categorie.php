@@ -38,13 +38,6 @@ class Categorie
     /**
      * @var string
      *
-     * @ORM\Column(name="visuel", type="string", length=255, nullable=false)
-     */
-    private $visuel;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="texte", type="string", length=255, nullable=false)
      */
     private $texte;
@@ -62,18 +55,6 @@ class Categorie
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getVisuel(): ?string
-    {
-        return $this->visuel;
-    }
-
-    public function setVisuel(string $visuel): self
-    {
-        $this->visuel = $visuel;
 
         return $this;
     }

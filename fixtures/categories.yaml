@@ -1,0 +1,4 @@
+App\Entity\Categorie:
+  categorie_{1..20}:
+    libelle: <categorie()>
+    texte: <sentence(4)>
