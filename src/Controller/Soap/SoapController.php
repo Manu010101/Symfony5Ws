@@ -13,16 +13,28 @@ class SoapController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstract
      * @Route("/soap", name="soap")
      * @return Response
      */
-    public function soapAction(CommandeService $commandeService)
+    public function soapAction()
     {
+        // options for ssl in php 5.6.5
+        $opts = array(
+            'ssl' => array(
+                'ciphers' => 'RC4-SHA',
+                'verify_peer' => false,
+                'verify_peer_name' => false
+            )
+        );
+
         ini_set("soap.wsdl_cache_enabled", "0");
         $options= array(
             'trace'=> 1,
             'encoding'  => 'UTF-8',
+            'verifypeer' => false,
+            'verifyhost' => false,
             'uri' => 'http://127.0.0.1:8000/soap',
             'cache_wsdl' => WSDL_CACHE_NONE,
             'exceptions' => true,
-            'soap_version' => SOAP_1_1
+            'soap_version' => SOAP_1_1,
+            'stream_context' => stream_context_create($opts)
         );
 
         $soapServer = new \SoapServer("../soap.wsdl",$options);

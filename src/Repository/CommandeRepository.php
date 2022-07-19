@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Commande;
-use App\Soap\Intervalle;
+use App\Soap\IntervalleSoap;
 use Doctrine\Persistence\ManagerRegistry;
 
 class CommandeRepository extends \Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository
@@ -16,13 +16,13 @@ class CommandeRepository extends \Doctrine\Bundle\DoctrineBundle\Repository\Serv
 
     /**
      * Récupère une commande passée dans un intervalle de temps donné
-     * @param Intervalle $intervalle
+     * @param IntervalleSoap $intervalle
      * @return float|int|mixed|string
      */
-    public function findByIntervalle(Intervalle $intervalle)
+    public function findByIntervalle(IntervalleSoap $intervalle)
     {
-        $debut = $intervalle->getDebut();
-        $fin = $intervalle->getFin();
+        $debut = $intervalle->debut;
+        $fin = $intervalle->fin;
 
         $qb = $this->createQueryBuilder('c')
             ->where('c.dateCommande >= :debut and c.dateCommande <= :fin')

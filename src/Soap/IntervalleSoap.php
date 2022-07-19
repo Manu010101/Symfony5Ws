@@ -2,7 +2,7 @@
 
 namespace App\Soap;
 
-class Date
+class IntervalleSoap
 {
     /**
      * @var string
