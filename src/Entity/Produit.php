@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource
  * @ORM\Table(name="produit", indexes={@ORM\Index(name="IDX_29A5EC27BCF5E72D", columns={"categorie_id"})})
  * @ORM\Entity
+ * @ApiResource(normalizationContext={"groups"={"produit"},"enable_max_depth"=true}, denormalizationContext={"groups"={"produitWrite"}})
+ * @ApiFilter(SearchFilter::class, properties={"libelle": "partial"})
+ * @ApiFilter(RangeFilter::class, properties={"prix"})
  */
 class Produit
 {
@@ -47,11 +50,11 @@ class Produit
     private $prix;
 
     /**
-     * @var \Categorie
+     * @var Categorie
      *
      * @ORM\ManyToOne(targetEntity="Categorie")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="categorie_id", referencedColumnName="id", nullable=true)
      * })
      */
     #[ApiSubresource]
@@ -107,7 +110,6 @@ class Produit
     {
         $this->categorie = $categorie;
 
-        return $this;
     }
 
 
