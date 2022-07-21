@@ -109,7 +109,7 @@ class SoapOperations
      * @param \App\Soap\IntervalleSoap $intervalle
      * @return array(\App\Soap\CommandeSoap)
      */
-    public function getCommandesByIntervalle(IntervalleSoap $intervalle)
+    public function getCommandesByIntervalle($intervalle)
     {
         $commandes = $this->doct->getRepository(Commande::class)->findByIntervalle($intervalle);
         $commandesSoap = [];

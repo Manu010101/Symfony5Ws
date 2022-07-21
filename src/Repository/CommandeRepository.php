@@ -16,10 +16,10 @@ class CommandeRepository extends \Doctrine\Bundle\DoctrineBundle\Repository\Serv
 
     /**
      * Récupère une commande passée dans un intervalle de temps donné
-     * @param IntervalleSoap $intervalle
+     * @param $intervalle
      * @return float|int|mixed|string
      */
-    public function findByIntervalle(IntervalleSoap $intervalle)
+    public function findByIntervalle($intervalle): mixed
     {
         $debut = $intervalle->debut;
         $fin = $intervalle->fin;

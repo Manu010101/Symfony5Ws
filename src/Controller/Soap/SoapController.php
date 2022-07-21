@@ -15,7 +15,7 @@ class SoapController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstract
      */
     public function soapAction()
     {
-        // options for ssl in php 5.6.5
+        // options pour enlever vérifications
         $opts = array(
             'ssl' => array(
                 'ciphers' => 'RC4-SHA',
