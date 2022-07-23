@@ -9,6 +9,8 @@ api_platform:
         html: ['text/html']
     swagger:
         versions: [3]
+    defaults:
+        pagination_maximum_items_per_page: 4
     collection:
         pagination:
             client_items_per_page: true
