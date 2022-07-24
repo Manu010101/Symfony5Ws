@@ -39,7 +39,7 @@ class LigneCommande
     /**
      * @var \Commande
      *
-     * @ORM\ManyToOne(targetEntity="Commande")
+     * @ORM\ManyToOne(targetEntity="Commande", inversedBy="ligneCommande")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_commande_id", referencedColumnName="id")
      * })
@@ -49,7 +49,7 @@ class LigneCommande
     /**
      * @var \Produit
      *
-     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="ligneCommande")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="produit_id", referencedColumnName="id")
      * })
